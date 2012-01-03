@@ -25,8 +25,8 @@ class LoadCourseData extends AbstractFixture implements OrderedFixtureInterface
 		
 		$course = new Course();
 		$course->setParent($this->getReference('test_course'));
-		$course->setTitle('Test course #1');
-		$course->setDescription('Description for test course #1');
+		$course->setTitle('Test course #2');
+		$course->setDescription('Description for test course #2');
 		$course->setIsPublic(false);
 		$course->setIsActive(true);
 		
