@@ -11,7 +11,9 @@
 	{% for content in lesson.textcontent %}
 		{% if loop.index == 1 %}
 			{% include 'SmirikCourseBundle:LessonContent:text.html.twig' with {'content': content} %}
-			<h2>{{ 'lesson.show.additional_text_content'|trans }}</h2>
+			{% if lesson.textcontent|length > 1 %}
+				<h2>{{ 'lesson.show.additional_text_content'|trans }}</h2>
+			{% endif %}
 		{% else %}  
 	  	<p><a href="{{ path('lesson_content', {"id": content.id }) }}">{{ content.title }}</a></p>
 		{% endif %}
@@ -32,5 +34,7 @@
 	  	<p><a href="{{ content.url }}">{{ content.title }}</a></p>
 		{% endfor %}
 	{% endif %}
+
+	<a class="btn" href="{{ path('course_lessons', { "id": lesson.course.id }) }}">{{ 'lesson.show.back'|trans }}</a>
 
 {% endblock %}

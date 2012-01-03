@@ -14,7 +14,7 @@ class CourseController extends Controller
 {
 	
 	/**
-	 * @Route("/")
+	 * @Route("/", name="course_index")
 	 * @Template()
 	 */
 	public function indexAction()
