@@ -56,6 +56,9 @@ class Lesson
      */
     private $lesson_content;
 
+    public function __construct() {
+			$this->lesson_content = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -105,5 +108,85 @@ class Lesson
     public function getTitle()
     {
         return $this->title;
+    }
+    
+    /**
+     * Set created_at
+     *
+     * @param datetime $createdAt
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->created_at = $createdAt;
+    }
+
+    /**
+     * Get created_at
+     *
+     * @return datetime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * Set updated_at
+     *
+     * @param datetime $updatedAt
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updated_at = $updatedAt;
+    }
+
+    /**
+     * Get updated_at
+     *
+     * @return datetime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updated_at;
+    }
+
+    /**
+     * Set course
+     *
+     * @param Smirik\CourseBundle\Entity\Course $course
+     */
+    public function setCourse(\Smirik\CourseBundle\Entity\Course $course)
+    {
+        $this->course = $course;
+    }
+
+    /**
+     * Get course
+     *
+     * @return Smirik\CourseBundle\Entity\Course 
+     */
+    public function getCourse()
+    {
+        return $this->course;
+    }
+
+    /**
+     * Add lesson_content
+     *
+     * @param Smirik\CourseBundle\Entity\LessonContent $lessonContent
+     */
+    public function addLessonContent(\Smirik\CourseBundle\Entity\LessonContent $lessonContent)
+    {
+        $this->lesson_content[] = $lessonContent;
+    }
+
+    /**
+     * Get lesson_content
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getLessonContent()
+    {
+        return $this->lesson_content;
     }
 }

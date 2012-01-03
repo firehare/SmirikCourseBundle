@@ -10,6 +10,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @ORM\Table(name="smirik_lessons_content")
  * @ORM\Entity
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="type", type="string")
+ * @ORM\DiscriminatorMap({"text" = "TextContent", "url" = "UrlContent", "youtube" = "YoutubeContent"})
  */
 class LessonContent
 {
@@ -63,6 +66,9 @@ class LessonContent
      */
     private $files;
 
+    public function __construct() {
+			$this->files = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -113,4 +119,85 @@ class LessonContent
     {
         return $this->description;
     }
+    
+    /**
+     * Set created_at
+     *
+     * @param datetime $createdAt
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->created_at = $createdAt;
+    }
+
+    /**
+     * Get created_at
+     *
+     * @return datetime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * Set updated_at
+     *
+     * @param datetime $updatedAt
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updated_at = $updatedAt;
+    }
+
+    /**
+     * Get updated_at
+     *
+     * @return datetime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updated_at;
+    }
+
+    /**
+     * Set lesson
+     *
+     * @param Smirik\CourseBundle\Entity\Lesson $lesson
+     */
+    public function setLesson(\Smirik\CourseBundle\Entity\Lesson $lesson)
+    {
+        $this->lesson = $lesson;
+    }
+
+    /**
+     * Get lesson
+     *
+     * @return Smirik\CourseBundle\Entity\Lesson 
+     */
+    public function getLesson()
+    {
+        return $this->lesson;
+    }
+
+    /**
+     * Add files
+     *
+     * @param Smirik\CourseBundle\Entity\LessonContentFile $files
+     */
+    public function addLessonContentFile(\Smirik\CourseBundle\Entity\LessonContentFile $files)
+    {
+        $this->files[] = $files;
+    }
+
+    /**
+     * Get files
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getFiles()
+    {
+        return $this->files;
+    }
+
 }

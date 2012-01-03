@@ -4,6 +4,7 @@ namespace Smirik\CourseBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Smirik\CourseBundle\Entity\Course as Course;
 
 /**
  * Smirik\CourseBundle\Entity\Course
@@ -23,22 +24,15 @@ class Course
     private $id;
 
     /**
-     * @OneToMany(targetEntity="Course", mappedBy="parent")
+     * @ORM\OneToMany(targetEntity="Course", mappedBy="parent")
      */
     private $children;
 
     /**
-     * @ManyToOne(targetEntity="Course", inversedBy="children")
-     * @JoinColumn(name="parent_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Course", inversedBy="children")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
      */
     private $parent;
-
-    /**
-     * @var integer $parent_id
-     *
-     * @ORM\Column(name="parent_id", type="integer")
-     */
-    private $course_id;
 
     /**
      * @var string $title
@@ -84,6 +78,10 @@ class Course
      */
     protected $updated_at;
 
+    public function __construct() {
+        $this->children = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
 
     /**
      * Get id
@@ -93,26 +91,6 @@ class Course
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set course_id
-     *
-     * @param integer $courseId
-     */
-    public function setCourseId($courseId)
-    {
-        $this->course_id = $courseId;
-    }
-
-    /**
-     * Get course_id
-     *
-     * @return integer 
-     */
-    public function getCourseId()
-    {
-        return $this->course_id;
     }
 
     /**
@@ -193,5 +171,85 @@ class Course
     public function getIsActive()
     {
         return $this->is_active;
+    }
+
+    /**
+     * Set created_at
+     *
+     * @param datetime $createdAt
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->created_at = $createdAt;
+    }
+
+    /**
+     * Get created_at
+     *
+     * @return datetime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * Set updated_at
+     *
+     * @param datetime $updatedAt
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updated_at = $updatedAt;
+    }
+
+    /**
+     * Get updated_at
+     *
+     * @return datetime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updated_at;
+    }
+
+    /**
+     * Add children
+     *
+     * @param Smirik\CourseBundle\Entity\Course $children
+     */
+    public function addCourse(\Smirik\CourseBundle\Entity\Course $children)
+    {
+        $this->children[] = $children;
+    }
+
+    /**
+     * Get children
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getChildren()
+    {
+        return $this->children;
+    }
+
+    /**
+     * Set parent
+     *
+     * @param Smirik\CourseBundle\Entity\Course $parent
+     */
+    public function setParent(\Smirik\CourseBundle\Entity\Course $parent)
+    {
+        $this->parent = $parent;
+    }
+
+    /**
+     * Get parent
+     *
+     * @return Smirik\CourseBundle\Entity\Course 
+     */
+    public function getParent()
+    {
+        return $this->parent;
     }
 }

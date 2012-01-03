@@ -107,4 +107,64 @@ class LessonContentFile
     {
         return $this->type;
     }
+
+    /**
+     * Set created_at
+     *
+     * @param datetime $createdAt
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->created_at = $createdAt;
+    }
+
+    /**
+     * Get created_at
+     *
+     * @return datetime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * Set updated_at
+     *
+     * @param datetime $updatedAt
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updated_at = $updatedAt;
+    }
+
+    /**
+     * Get updated_at
+     *
+     * @return datetime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updated_at;
+    }
+
+    /**
+     * Set lesson_content
+     *
+     * @param Smirik\CourseBundle\Entity\LessonContent $lessonContent
+     */
+    public function setLessonContent(\Smirik\CourseBundle\Entity\LessonContent $lessonContent)
+    {
+        $this->lesson_content = $lessonContent;
+    }
+
+    /**
+     * Get lesson_content
+     *
+     * @return Smirik\CourseBundle\Entity\LessonContent 
+     */
+    public function getLessonContent()
+    {
+        return $this->lesson_content;
+    }
 }
