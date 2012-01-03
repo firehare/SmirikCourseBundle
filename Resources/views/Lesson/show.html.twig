@@ -1,0 +1,36 @@
+{% extends 'SmirikQuizBundle::layout.html.twig' %}
+
+{% block title %}{{ lesson.title }} / {{ 'lesson.show.page_title'|trans }}{% endblock %}
+
+{% block header %}
+<h1>{{ lesson.title }} <small>{{ 'lesson.show.title.comment'|trans }}</small></h1>
+{% endblock %}
+
+{% block body %}
+
+	{% for content in lesson.textcontent %}
+		{% if loop.index == 1 %}
+			{% include 'SmirikCourseBundle:LessonContent:text.html.twig' with {'content': content} %}
+			<h2>{{ 'lesson.show.additional_text_content'|trans }}</h2>
+		{% else %}  
+	  	<p><a href="{{ path('lesson_content', {"id": content.id }) }}">{{ content.title }}</a></p>
+		{% endif %}
+	{% endfor %}
+
+	<!-- Youtube content -->
+	{% if lesson.youtubecontent|length > 0 %}
+		<h2>{{ 'lesson.show.youtube_content.title'|trans }}</h2>
+	  {% for content in lesson.youtubecontent %}
+	  	<p><a href="{{ content.url }}">{{ content.title }}</a></p>
+		{% endfor %}
+	{% endif %}
+
+	<!-- URL content -->
+	{% if lesson.urlcontent|length > 0 %}
+		<h2>{{ 'lesson.show.url_content.title'|trans }}</h2>
+	  {% for content in lesson.urlcontent %}
+	  	<p><a href="{{ content.url }}">{{ content.title }}</a></p>
+		{% endfor %}
+	{% endif %}
+
+{% endblock %}

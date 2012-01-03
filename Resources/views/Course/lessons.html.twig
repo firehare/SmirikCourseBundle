@@ -1,0 +1,24 @@
+{% extends 'SmirikQuizBundle::layout.html.twig' %}
+
+{% block title %}{{ course.title }} / {{ 'course.lessons.page_title'|trans }}{% endblock %}
+
+{% block header %}
+<h1>{{ course.title }} <small>{{ 'course.lessons.title.comment'|trans }}</small></h1>
+{% endblock %}
+
+{% block body %}
+
+	<table class="zebra-striped">
+		<tr>
+			<th width="30">#</th>
+			<th>{{ 'course.table.title'|trans }}</th>
+		</tr>
+	{% for lesson in lessons %}
+		<tr>
+			<td>{{ loop.index }}</td>
+			<td><a href="{{ path('lesson_show', { "id": lesson.id }) }}">{{ lesson.title }}</a></td>
+		</tr>	
+	{% endfor %}
+	</table>
+
+{% endblock %}

@@ -26,4 +26,23 @@ class CourseController extends Controller
 	  );
 	}
 	
+	/**
+	 * @Route("/{id}/lessons", name="course_lessons")
+	 * @Template()
+	 */
+	public function lessonsAction($id)
+	{
+		$id = (int)$id;
+		
+		$lm = $this->get('lesson.manager');
+		$course = $this->get('course.manager')->find($id);
+		$lessons = $lm->getLessonsByCourse($id);
+		
+		return array(
+			'course'  => $course,
+			'lessons' => $lessons,
+		);
+		
+	}
+	
 }

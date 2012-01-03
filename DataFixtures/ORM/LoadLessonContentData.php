@@ -42,6 +42,15 @@ class LoadLessonContentData extends AbstractFixture implements OrderedFixtureInt
 		$manager->flush();
 		
 		$this->addReference('url_content', $lc);
+
+		$lc = new TextContent();
+		$lc->setLesson($this->getReference('test_lesson1_0'));
+		$lc->setTitle('Content for Lesson #0 for course 1');
+		$lc->setDescription('Description for content for lesson #0');
+		$lc->setText('Text for content for lesson #0');
+		
+		$manager->persist($lc);
+		$manager->flush();
 		
 		/**
 		 * Add 10 text content to all lessons from first course.

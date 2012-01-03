@@ -2,9 +2,9 @@
 namespace Smirik\CourseBundle\Entity;
 
 use Doctrine\ORM\EntityManager;
-use Smirik\CourseBundle\Entity\Course;
+use Smirik\CourseBundle\Entity\Lesson;
 
-class CourseManager
+class LessonManager
 {
   
   protected $em;
@@ -19,15 +19,17 @@ class CourseManager
   }
 
 	/**
-	 * Get courses
+	 * Get lesssons by course
 	 * @method getCourses
 	 * @return DoctrineCollection
 	 */
-	public function getCourses()
+	public function getLessonsByCourse($course)
 	{
-		return $this->repository->findAll();
+		return $this->repository->findBy(array(
+			'course' => $course,
+		));
 	}
-	
+
 	/**
 	 * Find one Entity by primary key
 	 * @param integer $id

@@ -56,8 +56,27 @@ class Lesson
      */
     private $lesson_content;
 
+    /**
+     * @ORM\OneToMany(targetEntity="TextContent", mappedBy="lesson")
+     */
+    private $text_content;
+
+    /**
+     * @ORM\OneToMany(targetEntity="YoutubeContent", mappedBy="lesson")
+     */
+    private $youtube_content;
+
+    /**
+     * @ORM\OneToMany(targetEntity="UrlContent", mappedBy="lesson")
+     */
+    private $url_content;
+
+
     public function __construct() {
-			$this->lesson_content = new \Doctrine\Common\Collections\ArrayCollection();
+			$this->lesson_content  = new \Doctrine\Common\Collections\ArrayCollection();
+			$this->youtube_content = new \Doctrine\Common\Collections\ArrayCollection();
+			$this->text_content    = new \Doctrine\Common\Collections\ArrayCollection();
+			$this->url_content     = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -188,5 +207,65 @@ class Lesson
     public function getLessonContent()
     {
         return $this->lesson_content;
+    }
+
+    /**
+     * Add text_content
+     *
+     * @param Smirik\CourseBundle\Entity\TextContent $textContent
+     */
+    public function addTextContent(\Smirik\CourseBundle\Entity\TextContent $textContent)
+    {
+        $this->text_content[] = $textContent;
+    }
+
+    /**
+     * Get text_content
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getTextContent()
+    {
+        return $this->text_content;
+    }
+
+    /**
+     * Add youtube_content
+     *
+     * @param Smirik\CourseBundle\Entity\YoutubeContent $youtubeContent
+     */
+    public function addYoutubeContent(\Smirik\CourseBundle\Entity\YoutubeContent $youtubeContent)
+    {
+        $this->youtube_content[] = $youtubeContent;
+    }
+
+    /**
+     * Get youtube_content
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getYoutubeContent()
+    {
+        return $this->youtube_content;
+    }
+
+    /**
+     * Add url_content
+     *
+     * @param Smirik\CourseBundle\Entity\UrlContent $urlContent
+     */
+    public function addUrlContent(\Smirik\CourseBundle\Entity\UrlContent $urlContent)
+    {
+        $this->url_content[] = $urlContent;
+    }
+
+    /**
+     * Get url_content
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getUrlContent()
+    {
+        return $this->url_content;
     }
 }

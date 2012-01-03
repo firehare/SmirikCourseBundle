@@ -8,10 +8,18 @@
 
 {% block body %}
 
-	<ul>
+	<table class="zebra-striped">
+		<tr>
+			<th>#</th>
+			<th>{{ 'course.table.title'|trans }}</th>
+			<th>{{ 'course.table.description'|trans }}</th>
 	{% for course in courses %}
-	  <li>{{ course.title }}</li>
+		<tr>
+			<td>#{{ course.id }}</td>
+			<td><a href="{{ path('course_lessons', { "id": course.id }) }}">{{ course.title }}</a>
+			<td>{{ course.description }}</td>
+		</tr>	
 	{% endfor %}
-	</ul>
+	</table>
 
 {% endblock %}

@@ -1,7 +1,11 @@
 parameters:
   course.manager.class:      Smirik\CourseBundle\Entity\CourseManager
+  lesson.manager.class:      Smirik\CourseBundle\Entity\LessonManager
 
 services:
   course.manager:
     class:     %course.manager.class%
     arguments: ["@doctrine.orm.entity_manager", Smirik\CourseBundle\Entity\Course]
+  lesson.manager:
+    class:     %lesson.manager.class%
+    arguments: ["@doctrine.orm.entity_manager", Smirik\CourseBundle\Entity\Lesson]
