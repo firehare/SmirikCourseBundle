@@ -1,0 +1,17 @@
+{% extends 'SmirikQuizBundle::layout.html.twig' %}
+
+{% block title %}{{ 'course.index.page_title'|trans }}{% endblock %}
+
+{% block header %}
+<h1>{{ 'course.index.title'|trans }} <small>{{ 'course.index.title.comment'|trans }}</small></h1>
+{% endblock %}
+
+{% block body %}
+
+	<ul>
+	{% for course in courses %}
+	  <li>{{ course.title }}</li>
+	{% endfor %}
+	</ul>
+
+{% endblock %}
