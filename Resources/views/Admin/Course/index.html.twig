@@ -1,0 +1,49 @@
+{% extends 'SmirikQuizBundle::layout.html.twig' %}
+
+{% block title %}{{ 'admin.course.index.page_title'|trans }}{% endblock %}
+
+{% block header %}
+<h1>{{ 'admin.course.index.title'|trans }} <small>{{ 'admin.course.index.title.comment'|trans }}</small></h1>
+{% endblock %}
+
+{% block body %}
+
+	<table class="records_list zebra-striped">
+	    <thead>
+	        <tr>
+	            <th>{{ 'admin.course.table.header.id'|trans }}</th>
+	            <th>{{ 'admin.course.table.header.title'|trans }}</th>
+	            <th>{{ 'admin.course.table.header.description'|trans }}</th>
+	            <th>{{ 'admin.course.table.header.is_public'|trans }}</th>
+	            <th>{{ 'admin.course.table.header.is_active'|trans }}</th>
+	            <th>{{ 'admin.course.table.header.created_at'|trans }}</th>
+	            <th>{{ 'admin.course.table.actions'|trans }}</th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	    {% for entity in entities %}
+	        <tr>
+	            <td><a href="{{ path('admin_courses_edit', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+	            <td><a href="{{ path('admin_courses_edit', { 'id': entity.id }) }}">{{ entity.title }}</a></td>
+	            <td>{{ entity.description }}</td>
+	            <td>{{ entity.ispublic }}</td>
+	            <td>{{ entity.isactive }}</td>
+	            <td>{% if entity.createdat %}{{ entity.createdat|date('Y-m-d H:i:s') }}{% endif%}</td>
+	            <td>{% if entity.updatedat %}{{ entity.updatedat|date('Y-m-d H:i:s') }}{% endif%}</td>
+	            <td>
+	                <ul>
+	                    <li>
+	                        <a href="{{ path('admin_courses_edit', { 'id': entity.id }) }}">{{ 'admin.course.action.edit'|trans }}</a>
+	                    </li>
+	                </ul>
+	            </td>
+	        </tr>
+	    {% endfor %}
+	    </tbody>
+	</table>
+
+	<a href="{{ path('admin_courses_new') }}" class="btn">
+		{{ 'admin.course.action.create'|trans }}
+	</a>
+
+{% endblock %}

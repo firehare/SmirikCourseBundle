@@ -1,0 +1,36 @@
+{% extends 'SmirikQuizBundle::layout.html.twig' %}
+
+{% block title %}{{ 'admin.course.edit.page_title'|trans }}{% endblock %}
+
+{% block header %}
+<h1>{{ 'admin.course.edit.title'|trans }} <small>{{ 'admin.course.edit.title.comment'|trans }}</small></h1>
+{% endblock %}
+
+{% block body %}
+
+{{ form_errors(edit_form) }}
+
+<form action="{{ path('admin_courses_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+	{{ form_row(edit_form.parent) }}
+	{{ form_row(edit_form.title) }}
+	{{ form_row(edit_form.description) }}
+	{{ form_row(edit_form.is_active) }}
+	{{ form_row(edit_form.is_public) }}
+	
+	{{ form_rest(edit_form) }}
+   <p>
+       <button type="submit" class="btn primary">{{ 'admin.course.action.edit'|trans }}</button>
+   </p>
+</form>
+
+<form action="{{ path('admin_courses_delete', { 'id': entity.id }) }}" method="post">
+<div class="well">
+    {{ form_widget(delete_form) }}
+		<a href="{{ path('admin_courses') }}" class="btn">
+		    {{ 'admin.course.action.back'|trans }}
+		</a>
+    <button type="submit" class="btn danger">{{ 'admin.course.action.delete'|trans }}</button>
+</div>
+</form>
+
+{% endblock %}
