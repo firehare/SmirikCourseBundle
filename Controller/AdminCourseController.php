@@ -90,7 +90,7 @@ class AdminCourseController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_courses_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('admin_courses_edit', array('id' => $entity->getId())));
             
         }
 

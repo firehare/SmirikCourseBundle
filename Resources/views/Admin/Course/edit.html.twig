@@ -1,4 +1,4 @@
-{% extends 'SmirikQuizBundle::layout.html.twig' %}
+{% extends 'SmirikCourseBundle::layout.html.twig' %}
 
 {% block title %}{{ 'admin.course.edit.page_title'|trans }}{% endblock %}
 
@@ -8,12 +8,20 @@
 
 {% block body %}
 
-{{ form_errors(edit_form) }}
+{% form_theme edit_form 'SmirikCourseBundle:Form:fields.html.twig' %}
 
+{{ form_errors(edit_form) }}
 <form action="{{ path('admin_courses_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+	<fieldset>
 	{{ form_row(edit_form.parent) }}
 	{{ form_row(edit_form.title) }}
-	{{ form_row(edit_form.description) }}
+	<div class="clearfix">
+		{{ form_errors(edit_form.description) }}
+		{{ form_label(edit_form.description) }}
+		<div class="input">
+			{{ form_widget(edit_form.description, { 'attr': { 'class': 'xxlarge' }}) }}
+		</div>
+	</div>
 	{{ form_row(edit_form.is_active) }}
 	{{ form_row(edit_form.is_public) }}
 	
@@ -21,6 +29,7 @@
    <p>
        <button type="submit" class="btn primary">{{ 'admin.course.action.edit'|trans }}</button>
    </p>
+</fieldset>
 </form>
 
 <form action="{{ path('admin_courses_delete', { 'id': entity.id }) }}" method="post">
@@ -32,5 +41,4 @@
     <button type="submit" class="btn danger">{{ 'admin.course.action.delete'|trans }}</button>
 </div>
 </form>
-
 {% endblock %}

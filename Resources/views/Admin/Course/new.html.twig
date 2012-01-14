@@ -1,16 +1,39 @@
-<h1>Course creation</h1>
+{% extends 'SmirikCourseBundle::layout.html.twig' %}
+
+{% block title %}{{ 'admin.course.new.page_title'|trans }}{% endblock %}
+
+{% block header %}
+<h1>{{ 'admin.course.new.title'|trans }} <small>{{ 'admin.course.new.title.comment'|trans }}</small></h1>
+{% endblock %}
+
+{% block body %}
+
+{% form_theme form 'SmirikCourseBundle:Form:fields.html.twig' %}
 
 <form action="{{ path('admin_courses_create') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
-    <p>
-        <button type="submit">Create</button>
-    </p>
+		<fieldset>
+		{{ form_row(form.parent) }}
+		{{ form_row(form.title) }}
+		<div class="clearfix">
+			{{ form_errors(form.description) }}
+			{{ form_label(form.description) }}
+			<div class="input">
+				{{ form_widget(form.description, { 'attr': { 'class': 'xxlarge' }}) }}
+			</div>
+		</div>
+		{{ form_row(form.is_active) }}
+		{{ form_row(form.is_public) }}
+
+		{{ form_rest(form) }}
+	   <p>
+	       <button type="submit" class="btn primary">{{ 'admin.course.action.create'|trans }}</button>
+	   </p>
+	</fieldset>
 </form>
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('admin_courses') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+<div class="well">
+		<a href="{{ path('admin_courses') }}" class="btn">
+		    {{ 'admin.course.action.back'|trans }}
+		</a>
+</div>
+{% endblock %}

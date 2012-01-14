@@ -1,0 +1,45 @@
+# Base translations
+admin.course.action.back: Назад
+admin.course.action.edit: Изменить
+admin.course.action.create: Создать
+admin.course.action.delete: Удалить
+admin.course.table.actions: действия
+
+# Admin
+# Course list
+admin.course.index.page_title: Администрирование курсов
+admin.course.index.title: Список курсов
+admin.course.index.title.comment: все курсы
+admin.course.table.header.id: №
+admin.course.table.header.title: название
+admin.course.table.header.description: описание
+admin.course.table.header.is_public: открытый
+admin.course.table.header.is_active: активный
+admin.course.table.header.created_at: создан
+
+# Course edit
+admin.course.edit.page_title: Редактировать курс
+admin.course.edit.title: Редактирование
+admin.course.edit.title.comment: курса
+
+# Course new
+admin.course.new.page_title: Создать курс
+admin.course.new.title: Создание
+admin.course.new.title.comment: курса
+
+# Forms
+form.Parent:        Родитель
+form.Title:         Заголовок
+form.Description:   Описание
+form.Time:          Продолжительность
+form.Isactive:      Включен
+form.Is public:      Общая
+
+# Answer form
+form.Answers: Форма ответов
+form.0: Ответ 1
+form.1: Ответ 2
+form.2: Ответ 3
+form.3: Ответ 4
+form.Is right: Правильный?
+form.V file: Файл
