@@ -27,6 +27,14 @@ admin.course.new.page_title: Создать курс
 admin.course.new.title: Создание
 admin.course.new.title.comment: курса
 
+# Lesson list
+admin.lesson.index.page_title: Администрирование уроков
+admin.lesson.index.title: Полный
+admin.lesson.index.title.comment: список уроков
+admin.lesson.table.header.id: №
+admin.lesson.table.header.title: название
+admin.lesson.table.header.created_at: создан
+
 # Forms
 form.Parent:        Родитель
 form.Title:         Заголовок
@@ -34,7 +42,7 @@ form.Description:   Описание
 form.Time:          Продолжительность
 form.Isactive:      Включен
 form.Is public:      Общая
-
+form.Course:        Курс
 # Answer form
 form.Answers: Форма ответов
 form.0: Ответ 1

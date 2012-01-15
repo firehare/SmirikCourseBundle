@@ -25,10 +25,24 @@ class AdminLessonController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getEntityManager();
+				
+				$course_id = $this->getRequest()->query->get('course_id', false); 
+				if ($course_id)
+				{
+					$course = $em->getRepository('SmirikCourseBundle:Course')->findOneById($course_id);
+					$entities = $em->getRepository('SmirikCourseBundle:Lesson')->findBy(array(
+						'course' => $course_id,
+					));
+				} else
+				{
+	        $entities = $em->getRepository('SmirikCourseBundle:Lesson')->findAll();
+					$course = false;
+				}
 
-        $entities = $em->getRepository('SmirikCourseBundle:Lesson')->findAll();
-
-        return array('entities' => $entities);
+        return array(
+					'entities' => $entities,
+					'course' => $course,
+				);
     }
 
     /**

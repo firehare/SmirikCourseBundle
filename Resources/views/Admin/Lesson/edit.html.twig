@@ -1,22 +1,31 @@
-<h1>Lesson edit</h1>
+{% extends 'SmirikCourseBundle::layout.html.twig' %}
+
+{% block title %}{{ 'admin.lesson.edit.page_title'|trans }}{% endblock %}
+
+{% block header %}
+<h1>{{ 'admin.lesson.edit.title'|trans }} <small>{{ 'admin.lesson.edit.title.comment'|trans }}</small></h1>
+{% endblock %}
+
+{% block body %}
+
+{% form_theme edit_form 'SmirikCourseBundle:Form:fields.html.twig' %}
 
 <form action="{{ path('admin_lessons_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+	<fieldset>
     {{ form_widget(edit_form) }}
-    <p>
-        <button type="submit">Edit</button>
-    </p>
+   <p>
+       <button type="submit" class="btn primary">{{ 'admin.course.action.edit'|trans }}</button>
+   </p>
+	</fieldset>
 </form>
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('admin_lessons') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('admin_lessons_delete', { 'id': entity.id }) }}" method="post">
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
+<form action="{{ path('admin_lessons_delete', { 'id': entity.id }) }}" method="post">
+<div class="well">
+    {{ form_widget(delete_form) }}
+		<a href="{{ path('admin_courses') }}" class="btn">
+		    {{ 'admin.course.action.back'|trans }}
+		</a>
+    <button type="submit" class="btn danger">{{ 'admin.course.action.delete'|trans }}</button>
+</div>
+</form>
+{% endblock %}
