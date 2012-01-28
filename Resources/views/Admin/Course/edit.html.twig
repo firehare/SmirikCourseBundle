@@ -19,12 +19,11 @@
 		{{ form_errors(edit_form.description) }}
 		{{ form_label(edit_form.description) }}
 		<div class="input">
-			{{ form_widget(edit_form.description, { 'attr': { 'class': 'xxlarge' }}) }}
+			{{ form_widget(edit_form.description, { 'attr': { 'class': 'tinymce xxlarge', 'tinymce': '{"theme": "simple"}' }}) }}
 		</div>
 	</div>
 	{{ form_row(edit_form.is_active) }}
 	{{ form_row(edit_form.is_public) }}
-	
 	{{ form_rest(edit_form) }}
    <p>
        <button type="submit" class="btn primary">{{ 'admin.course.action.edit'|trans }}</button>

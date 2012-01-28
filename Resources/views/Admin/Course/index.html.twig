@@ -31,9 +31,12 @@
 	            <td>{% if entity.createdat %}{{ entity.createdat|date('Y-m-d H:i:s') }}{% endif%}</td>
 	            <td>
 	                <ul>
-	                    <li>
-	                        <a href="{{ path('admin_courses_edit', { 'id': entity.id }) }}">{{ 'admin.course.action.edit'|trans }}</a>
-	                    </li>
+                    <li>
+                        <a href="{{ path('admin_lessons', { 'course_id': entity.id }) }}">{{ 'admin.course.action.lessons'|trans }}</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('admin_courses_edit', { 'id': entity.id }) }}">{{ 'admin.course.action.edit'|trans }}</a>
+                    </li>
 	                </ul>
 	            </td>
 	        </tr>

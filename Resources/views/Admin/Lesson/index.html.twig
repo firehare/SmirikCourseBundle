@@ -17,7 +17,7 @@
 <table class="records_list zebra-striped">
     <thead>
         <tr>
-            <th>{{ 'admin.lesson.table.header.id'|trans }}</th>
+            <th width="40">{{ 'admin.lesson.table.header.id'|trans }}</th>
             <th>{{ 'admin.lesson.table.header.title'|trans }}</th>
             <th>{{ 'admin.lesson.table.header.created_at'|trans }}</th>
             <th>{{ 'admin.course.table.actions'|trans }}</th>
@@ -30,13 +30,16 @@
             <td><a href="{{ path('admin_lessons_show', { 'id': entity.id }) }}">{{ entity.title }}</a></td>
             <td>{% if entity.createdat %}{{ entity.createdat|date('Y-m-d H:i:s') }}{% endif%}</td>
             <td>
-							<a href="{{ path('admin_lessons_edit', { 'id': entity.id }) }}">edit</a>
+							<a href="{{ path('admin_lessons_edit', { 'id': entity.id }) }}">{{ 'admin.course.action.edit'|trans }}</a>
             </td>
         </tr>
     {% endfor %}
     </tbody>
 </table>
 
+	<a href="{{ path('admin_courses') }}" class="btn">
+		{{ 'admin.lesson.course-back'|trans }}
+	</a>
 	<a href="{{ path('admin_lessons_new') }}" class="btn">
 		{{ 'admin.course.action.create'|trans }}
 	</a>

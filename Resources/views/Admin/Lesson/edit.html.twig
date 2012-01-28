@@ -3,26 +3,110 @@
 {% block title %}{{ 'admin.lesson.edit.page_title'|trans }}{% endblock %}
 
 {% block header %}
-<h1>{{ 'admin.lesson.edit.title'|trans }} <small>{{ 'admin.lesson.edit.title.comment'|trans }}</small></h1>
+<h1>{{ entity.title }} <small>{{ 'admin.lesson.edit.title.comment'|trans }}</small></h1>
 {% endblock %}
 
 {% block body %}
 
 {% form_theme edit_form 'SmirikCourseBundle:Form:fields.html.twig' %}
 
+<ul class="tabs">
+  <li class="active"><a href="#home">{{ 'admin.lesson.edit.lesson.main'|trans }}</a></li>
+  <li><a href="#textcontent">{{ 'admin.lesson.edit.lesson.text'|trans }}</a></li>
+  <li><a href="#urlcontent">{{ 'admin.lesson.edit.lesson.url'|trans }}</a></li>
+  <li><a href="#youtubecontent">{{ 'admin.lesson.edit.lesson.youtube'|trans }}</a></li>
+</ul>
+
 <form action="{{ path('admin_lessons_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
 	<fieldset>
-    {{ form_widget(edit_form) }}
-   <p>
-       <button type="submit" class="btn primary">{{ 'admin.course.action.edit'|trans }}</button>
-   </p>
+    {{ form_errors(edit_form) }}
+ 
+<div class="pill-content">
+
+    <div class="active" id="home">
+      {{ form_row(edit_form.course) }}
+      {{ form_row(edit_form.title) }}
+      {{ form_row(edit_form._token) }}
+    </div>
+    
+    <div id="textcontent">
+      <ul class="unstyled">
+  			{% for text in edit_form.text_content %}
+  			  <li> <h3 class="bottom_line">{{ text.vars.value.title }}</h3>
+  			    <ul class="unstyled">
+      				<li>{{ form_row(text.title)}}</li>
+      				<li>{{ form_row(text.description)}}</li>
+      				<li>{{ form_row(text.text)}}</li>
+  			    </ul>
+  			  </li>
+  			{% endfor %}
+  		</ul>
+		</div>
+    
+    <div id="urlcontent">
+      <ul class="unstyled">
+  			{% for url in edit_form.url_content %}
+			    <li> <h3 class="bottom_line">{{ url.vars.value.title }}</h3>
+  			    <ul class="unstyled">
+      				<li>{{ form_row(url.title)}}</li>
+      				<li>{{ form_row(url.description)}}</li>
+      				<li>{{ form_row(url.url)}}</li>
+  			    </ul>
+  			  </li>
+  			{% endfor %}
+  		</ul>
+		</div>
+
+    <div id="youtubecontent">
+      <ul class="unstyled">
+  			{% for url in edit_form.youtube_content %}
+		      <li> <h3 class="bottom_line">{{ url.vars.value.title }}</h3>
+  			    <ul class="unstyled">
+      				<li>{{ form_row(url.title)}}</li>
+      				<li>{{ form_row(url.description)}}</li>
+      				<li>{{ form_row(url.url)}}</li>
+  			    </ul>
+  			  </li>
+  			{% endfor %}
+  		</ul>
+		</div>
+    
+      {% if false %}
+  		<p>
+  		<a href="#" class="ajax" onclick="$('#admin_lessons_text_content').toggle()">{{ 'admin.lesson.edit.text-content-show'|trans }}</a>
+  		</p>
+		
+  		<ul>
+  			{% for text in entity.textcontent %}
+  				<li><a class="ajax" href="#" data-controls-modal="myform" data-keyboard="true" data-backdrop="static" >{{ text.title}}</a></li>
+  			{% endfor %}
+  		</ul>
+		
+  		{% for form in text_content_forms %}
+  		  {% include 'SmirikCourseBundle:Admin/Lesson:modal_form.html.twig' with {'form': form, 'form_name': 'myform' } %}
+  		{% endfor %}
+
+      {% endif %}
+		
+</div>
+
+  <div class="well">
+     <button type="submit" class="btn primary">{{ 'admin.course.action.save'|trans }}</button>
+  </div>
+
 	</fieldset>
 </form>
+
+<script>
+  $(function () {
+    $('.tabs').tabs()
+  })
+</script>
 
 <form action="{{ path('admin_lessons_delete', { 'id': entity.id }) }}" method="post">
 <div class="well">
     {{ form_widget(delete_form) }}
-		<a href="{{ path('admin_courses') }}" class="btn">
+		<a href="{{ path('admin_lessons', { 'course_id': entity.course.id }) }}" class="btn">
 		    {{ 'admin.course.action.back'|trans }}
 		</a>
     <button type="submit" class="btn danger">{{ 'admin.course.action.delete'|trans }}</button>

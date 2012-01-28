@@ -1,9 +1,11 @@
 # Base translations
 admin.course.action.back: Назад
 admin.course.action.edit: Изменить
+admin.course.action.save: Сохранить
 admin.course.action.create: Создать
 admin.course.action.delete: Удалить
 admin.course.table.actions: действия
+admin.course.action.lessons: Список уроков
 
 # Admin
 # Course list
@@ -34,6 +36,19 @@ admin.lesson.index.title.comment: список уроков
 admin.lesson.table.header.id: №
 admin.lesson.table.header.title: название
 admin.lesson.table.header.created_at: создан
+admin.lesson.course-back: Назад к курсам
+
+admin.lesson.edit.title.comment: редактирование
+
+admin.lesson.edit.text-content-show: Текстовые материалы
+admin.lesson.edit.url-content-show: Ссылки по уроку
+admin.lesson.edit.youtube-content-show: Ссылки на видео Youtube
+
+admin.lesson.edit.lesson.main: Урок
+admin.lesson.edit.lesson.text: Текстовые материалы
+admin.lesson.edit.lesson.url: Ссылки
+admin.lesson.edit.lesson.youtube: Youtube
+
 
 # Forms
 form.Parent:        Родитель
@@ -43,11 +58,20 @@ form.Time:          Продолжительность
 form.Isactive:      Включен
 form.Is public:      Общая
 form.Course:        Курс
+
+form.Text content: Текстовые материалы
+form.Url content: Ссылки
+form.Youtube content: Видеоролики Youtube
+
+form.Url: Ссылка
+
 # Answer form
 form.Answers: Форма ответов
-form.0: Ответ 1
-form.1: Ответ 2
-form.2: Ответ 3
-form.3: Ответ 4
+form.0: N1
+form.1: N2
+form.2: N3
+form.3: N4
 form.Is right: Правильный?
 form.V file: Файл
+
+form.collection.item.add: Добавить новый

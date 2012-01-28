@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Smirik\CourseBundle\Entity\Lesson;
 use Smirik\CourseBundle\Form\LessonType;
+use Smirik\CourseBundle\Form\TextContentType;
 
 /**
  * Lesson controller.
@@ -35,7 +36,7 @@ class AdminLessonController extends Controller
 					));
 				} else
 				{
-	        $entities = $em->getRepository('SmirikCourseBundle:Lesson')->findAll();
+	        $entities = false;
 					$course = false;
 				}
 
@@ -132,11 +133,18 @@ class AdminLessonController extends Controller
 
         $editForm = $this->createForm(new LessonType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
+				
+				$text_content_forms = array();
+				foreach ($entity->getTextContent() as $text_content)
+				{
+					$text_content_forms[] = $this->createForm(new TextContentType(), $text_content)->createView();
+				}
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'entity'       => $entity,
+						'text_content_forms' => $text_content_forms,
+            'edit_form'    => $editForm->createView(),
+            'delete_form'  => $deleteForm->createView(),
         );
     }
 
@@ -161,9 +169,7 @@ class AdminLessonController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         $request = $this->getRequest();
-
         $editForm->bindRequest($request);
-
         if ($editForm->isValid()) {
             $em->persist($entity);
             $em->flush();
@@ -212,5 +218,30 @@ class AdminLessonController extends Controller
             ->add('id', 'hidden')
             ->getForm()
         ;
+    }
+    
+    /**
+     * Show URL content for lesson
+     *
+     * @Route("/{id}/urls", name="admin_lessons_urls")
+     * @Method("get")
+  	 * @Template("SmirikCourseBundle:Admin\Lesson:urls.html.twig")
+     */    
+    public function urlsAction($id)
+    {
+      $em = $this->getDoctrine()->getEntityManager();
+      $entity = $em->getRepository('SmirikCourseBundle:Lesson')->find($id);
+
+      if (!$entity) {
+          throw $this->createNotFoundException('Unable to find Lesson entity.');
+      }
+
+      $editForm = $this->createForm(new LessonType(), $entity);
+			
+      return array(
+        'entity'       => $entity,
+        'edit_form'    => $editForm->createView(),
+      );
+      
     }
 }

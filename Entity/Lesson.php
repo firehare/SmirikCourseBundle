@@ -24,7 +24,7 @@ class Lesson
 
     /**
      * @ORM\ManyToOne(targetEntity="Smirik\CourseBundle\Entity\Course", inversedBy="smirik_courses")
-     * @ORM\JoinColumn(name="course_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="course_id", referencedColumnName="id", onDelete="CASCADE", nullable=TRUE)
      */
     private $course;
 

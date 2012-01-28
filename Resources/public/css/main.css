@@ -1,3 +1,8 @@
 div.form_row { margin: 0px; clear: both}
 div.form_row div.form_label { float: left; margin: 0 20px 10px 0; }
 div.form_row div.form_widget { }
+
+div.form_collection_add_new { margin: 10px 0px; }
+
+ul.pills_height { height: 20px; }
+h3.bottom_line { border-bottom: lightgray 1px solid; margin: 0 0 10px 0; }

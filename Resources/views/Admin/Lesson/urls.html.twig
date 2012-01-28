@@ -1,0 +1,35 @@
+{% extends 'SmirikCourseBundle::layout.html.twig' %}
+
+{% block title %}{{ 'admin.lesson.edit.page_title'|trans }}{% endblock %}
+
+{% block header %}
+<h1>{{ entity.title }} <small>{{ 'admin.lesson.edit.title.comment'|trans }}</small></h1>
+{% endblock %}
+
+{% block body %}
+
+{% include 'SmirikCourseBundle:Admin/Lesson:nav.html.twig' with {'id': entity.id, 'current': 3 } %}
+
+{% form_theme edit_form 'SmirikCourseBundle:Form:fields.html.twig' %}
+
+<form action="{{ path('admin_lessons_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+	<fieldset>
+    {{ form_row(edit_form._token) }}
+		<ul class="unstyled">
+			{% for url in edit_form.url_content %}
+			  <li> Link
+			    <ul class="unstyled">
+    				<li>{{ form_row(url.title)}}</li>
+    				<li>{{ form_row(url.description)}}</li>
+    				<li>{{ form_row(url.url)}}</li>
+			    </ul>
+			  </li>
+			{% endfor %}
+		</ul>
+
+  </fieldset>
+	<div class="well">
+     <button type="submit" class="btn primary">{{ 'admin.course.action.edit'|trans }}</button>
+	</div>
+</form>
+{% endblock %}
