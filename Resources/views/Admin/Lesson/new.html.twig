@@ -1,3 +1,5 @@
+{% extends 'SmirikCourseBundle:Admin:layout.html.twig' %}
+
 <h1>Lesson creation</h1>
 
 <form action="{{ path('admin_lessons_create') }}" method="post" {{ form_enctype(form) }}>

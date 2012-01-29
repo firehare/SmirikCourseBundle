@@ -32,29 +32,6 @@ class AdminCourseController extends Controller
     }
 
     /**
-     * Finds and displays a Course entity.
-     *
-     * @Route("/{id}/show", name="admin_courses_show")
-  	 * @Template("SmirikCourseBundle:Admin\Course:show.html.twig")
-     */
-    public function showAction($id)
-    {
-        $em = $this->getDoctrine()->getEntityManager();
-
-        $entity = $em->getRepository('SmirikCourseBundle:Course')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Course entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-
-        return array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        );
-    }
-
-    /**
      * Displays a form to create a new Course entity.
      *
      * @Route("/new", name="admin_courses_new")

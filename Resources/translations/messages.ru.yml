@@ -9,6 +9,7 @@ admin.course.action.lessons: Список уроков
 
 # Admin
 # Course list
+admin.course.menu: Курсы и уроки
 admin.course.index.page_title: Администрирование курсов
 admin.course.index.title: Список курсов
 admin.course.index.title.comment: все курсы

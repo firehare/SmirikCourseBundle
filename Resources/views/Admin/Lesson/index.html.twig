@@ -1,4 +1,4 @@
-{% extends 'SmirikCourseBundle::layout.html.twig' %}
+{% extends 'SmirikCourseBundle:Admin:layout.html.twig' %}
 
 {% block title %}{{ 'admin.lesson.index.page_title'|trans }}{% endblock %}
 
@@ -26,8 +26,8 @@
     <tbody>
     {% for entity in entities %}
         <tr>
-            <td><a href="{{ path('admin_lessons_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-            <td><a href="{{ path('admin_lessons_show', { 'id': entity.id }) }}">{{ entity.title }}</a></td>
+            <td><a href="{{ path('admin_lessons_edit', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td><a href="{{ path('admin_lessons_edit', { 'id': entity.id }) }}">{{ entity.title }}</a></td>
             <td>{% if entity.createdat %}{{ entity.createdat|date('Y-m-d H:i:s') }}{% endif%}</td>
             <td>
 							<a href="{{ path('admin_lessons_edit', { 'id': entity.id }) }}">{{ 'admin.course.action.edit'|trans }}</a>
