@@ -11,5 +11,6 @@ services:
     arguments: ["@doctrine.orm.entity_manager", Smirik\CourseBundle\Entity\Lesson]
   course.configure_menu_listener:
       class: Smirik\CourseBundle\EventListener\ConfigureMenuListener
+      arguments: [ @templating ]
       tags:
         - { name: kernel.event_listener, event: smirik_admin.menu_configure, method: onMenuConfigure }
