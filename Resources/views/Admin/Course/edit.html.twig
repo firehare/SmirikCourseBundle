@@ -8,26 +8,18 @@
 
 {% block body %}
 
-{% form_theme edit_form 'SmirikAdminBundle:Form:fields.html.twig' %}
-
 {{ form_errors(edit_form) }}
-<form action="{{ path('admin_courses_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+<form action="{{ path('admin_courses_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }} class="form-horizontal">
 	<fieldset>
 	{{ form_row(edit_form.parent) }}
 	{{ form_row(edit_form.title) }}
-	<div class="clearfix">
-		{{ form_errors(edit_form.description) }}
-		{{ form_label(edit_form.description) }}
-		<div class="input">
-			{{ form_widget(edit_form.description, { 'attr': { 'class': 'tinymce xxlarge', 'tinymce': '{"theme": "simple"}' }}) }}
-		</div>
-	</div>
+	{{ form_row(edit_form.description) }}
 	{{ form_row(edit_form.is_active) }}
 	{{ form_row(edit_form.is_public) }}
 	{{ form_rest(edit_form) }}
-   <p>
-       <button type="submit" class="btn primary">{{ 'admin.course.action.edit'|trans }}</button>
-   </p>
+  <div class="well">
+     <button type="submit" class="btn btn-primary">{{ 'admin.course.action.save'|trans }}</button>
+   </div>
 </fieldset>
 </form>
 
@@ -37,7 +29,7 @@
 		<a href="{{ path('admin_courses') }}" class="btn">
 		    {{ 'admin.course.action.back'|trans }}
 		</a>
-    <button type="submit" class="btn danger">{{ 'admin.course.action.delete'|trans }}</button>
+    <button type="submit" class="btn btn-danger">{{ 'admin.course.action.delete'|trans }}</button>
 </div>
 </form>
 {% endblock %}
