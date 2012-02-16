@@ -54,22 +54,22 @@ class Lesson
     /**
      * @ORM\OneToMany(targetEntity="LessonContent", mappedBy="lesson")
      */
-    private $lesson_content;
+    public $lesson_content;
 
     /**
      * @ORM\OneToMany(targetEntity="TextContent", mappedBy="lesson")
      */
-    private $text_content;
+    public $text_content;
 
     /**
      * @ORM\OneToMany(targetEntity="YoutubeContent", mappedBy="lesson")
      */
-    private $youtube_content;
+    public $youtube_content;
 
     /**
      * @ORM\OneToMany(targetEntity="UrlContent", mappedBy="lesson")
      */
-    private $url_content;
+    public $url_content;
 
 
     public function __construct() {

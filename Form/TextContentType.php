@@ -11,7 +11,7 @@ class TextContentType extends AbstractType
     {
       $builder
         ->add('title')
-        ->add('description', 'textarea', array('attr' => array('class' => 'tinymce xxlarge ylarge', 'tinymce' => '{"theme":"simple"}')))
+        ->add('description', 'textarea', array('attr' => array('class' => 'tinymce description xxlarge ylarge', 'tinymce' => '{"theme":"simple"}')))
         ->add('text', 'textarea', array('attr' => array('class' => 'tinymce xxlarge yylarge', 'tinymce' => '{"theme":"simple"}')))
       ;
     }

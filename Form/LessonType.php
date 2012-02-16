@@ -15,11 +15,9 @@ class LessonType extends AbstractType
 			;
 
       $builder
-				->add('text_content', 'collection', array('type' => new TextContentType(), 'options' => array(
-					'required' => false,
-				), 'allow_add' => true))
-				->add('url_content', 'collection', array('type' => new UrlContentType()))
-				->add('youtube_content', 'collection', array('type' => new YoutubeContentType()))
+				->add('text_content', 'collection', array('type' => new TextContentType(), 'allow_add' => true, 'by_reference' => false))
+				->add('url_content', 'collection', array('type' => new UrlContentType(), 'allow_add' => true, 'by_reference' => false))
+				->add('youtube_content', 'collection', array('type' => new YoutubeContentType(), 'allow_add' => true, 'by_reference' => false))
 			;
 
     }

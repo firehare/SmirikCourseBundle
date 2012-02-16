@@ -49,18 +49,29 @@ class AdminLessonController extends Controller
     /**
      * Displays a form to create a new Lesson entity.
      *
-     * @Route("/new", name="admin_lessons_new")
+     * @Route("/course{course_id}/new", name="admin_lessons_new")
   	 * @Template("SmirikCourseBundle:Admin\Lesson:new.html.twig")
      */
-    public function newAction()
+    public function newAction($course_id = false)
     {
-        $entity = new Lesson();
-        $form   = $this->createForm(new LessonType(), $entity);
+      $em = $this->getDoctrine()->getEntityManager();
+      $entity = new Lesson();
+      if ($course_id)
+      {
+      	$course = $em->getRepository('SmirikCourseBundle:Course')->findOneById($course_id);
+      	if (!$course)
+      	{
+      	  throw $this->createNotFoundException('Not found');
+      	}
+        $entity->setCourse($course);
+      }
+      $form   = $this->createForm(new LessonType(), $entity);
 
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView()
-        );
+      return array(
+          'entity' => $entity,
+          'course' => $course,
+          'form'   => $form->createView()
+      );
     }
 
     /**
@@ -82,7 +93,7 @@ class AdminLessonController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_lessons_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('admin_lessons_edit', array('id' => $entity->getId())));
             
         }
 
@@ -117,9 +128,12 @@ class AdminLessonController extends Controller
 					$text_content_forms[] = $this->createForm(new TextContentType(), $text_content)->createView();
 				}
 
+        $text_content_form  = $this->createForm(new TextContentType())->createView();
+
         return array(
             'entity'       => $entity,
 						'text_content_forms' => $text_content_forms,
+						'text_content_form'  => $text_content_form,
             'edit_form'    => $editForm->createView(),
             'delete_form'  => $deleteForm->createView(),
         );

@@ -30,64 +30,77 @@
     </div>
     
     <div id="textcontent" class="tab-pane fade">
-      <ul class="unstyled">
-  			{% for text in edit_form.text_content %}
-  			  <li> <h3 class="bottom_line">{{ text.vars.value.title }}</h3>
-  			    <ul class="unstyled">
-      				<li>{{ form_row(text.title)}}</li>
-      				<li>{{ form_row(text.description)}}</li>
-      				<li>{{ form_row(text.text)}}</li>
-  			    </ul>
-  			  </li>
-  			{% endfor %}
-  		</ul>
-		</div>
+      {% for text in edit_form.text_content %}
+        <div class="accordion" id="textcontent{{ text.vars.value.id }}">
+          <div class="accordion-group">
+            <div class="accordion-heading">
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="#textcontent{{ text.vars.value.id }}" href="#collapse{{ text.vars.value.id }}">
+                {{ text.vars.value.title }}
+              </a>
+            </div>
+            <div id="collapse{{ text.vars.value.id }}" class="accordion-body collapse">
+              <div class="accordion-inner">
+                <ul class="unstyled">
+                  <li>{{ form_row(text.title)}}</li>
+                  <li>{{ form_row(text.description)}}</li>
+                  <li>{{ form_row(text.text)}}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+      <hr />
+    </div>
     
     <div id="urlcontent" class="tab-pane fade">
-      <ul class="unstyled">
-  			{% for url in edit_form.url_content %}
-			    <li> <h3 class="bottom_line">{{ url.vars.value.title }}</h3>
-  			    <ul class="unstyled">
-      				<li>{{ form_row(url.title)}}</li>
-      				<li>{{ form_row(url.description)}}</li>
-      				<li>{{ form_row(url.url)}}</li>
-  			    </ul>
-  			  </li>
-  			{% endfor %}
-  		</ul>
-		</div>
+      {% for url in edit_form.url_content %}
+        <div class="accordion" id="urlcontent{{ url.vars.value.id }}">
+          <div class="accordion-group">
+            <div class="accordion-heading">
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="#urlcontent{{ url.vars.value.id }}" href="#collapse{{ url.vars.value.id }}">
+                {{ url.vars.value.title }}
+              </a>
+            </div>
+            <div id="collapse{{ url.vars.value.id }}" class="accordion-body collapse">
+              <div class="accordion-inner">
+                <ul class="unstyled">
+                  <li>{{ form_row(url.title)}}</li>
+                  <li>{{ form_row(url.description)}}</li>
+                  <li>{{ form_row(url.url)}}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+      <hr />
+    </div>
 
     <div id="youtubecontent" class="tab-pane fade">
-      <ul class="unstyled">
-  			{% for url in edit_form.youtube_content %}
-		      <li> <h3 class="bottom_line">{{ url.vars.value.title }}</h3>
-  			    <ul class="unstyled">
-      				<li>{{ form_row(url.title)}}</li>
-      				<li>{{ form_row(url.description)}}</li>
-      				<li>{{ form_row(url.url)}}</li>
-  			    </ul>
-  			  </li>
-  			{% endfor %}
-  		</ul>
-		</div>
+      {% for youtube in edit_form.youtube_content %}
+        <div class="accordion" id="youtubecontent{{ youtube.vars.value.id }}">
+          <div class="accordion-group">
+            <div class="accordion-heading">
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="#youtubecontent{{ youtube.vars.value.id }}" href="#collapse{{ youtube.vars.value.id }}">
+                {{ youtube.vars.value.title }}
+              </a>
+            </div>
+            <div id="collapse{{ youtube.vars.value.id }}" class="accordion-body collapse">
+              <div class="accordion-inner">
+                <ul class="unstyled">
+                  <li>{{ form_row(youtube.title)}}</li>
+                  <li>{{ form_row(youtube.description)}}</li>
+                  <li>{{ form_row(youtube.url)}}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+      <hr />
+    </div>
     
-      {% if false %}
-  		<p>
-  		<a href="#" class="ajax" onclick="$('#admin_lessons_text_content').toggle()">{{ 'admin.lesson.edit.text-content-show'|trans }}</a>
-  		</p>
-		
-  		<ul>
-  			{% for text in entity.textcontent %}
-  				<li><a class="ajax" href="#" data-controls-modal="myform" data-keyboard="true" data-backdrop="static" >{{ text.title}}</a></li>
-  			{% endfor %}
-  		</ul>
-		
-  		{% for form in text_content_forms %}
-  		  {% include 'SmirikCourseBundle:Admin/Lesson:modal_form.html.twig' with {'form': form, 'form_name': 'myform' } %}
-  		{% endfor %}
-
-      {% endif %}
-		
 </div>
 
   <div class="well">

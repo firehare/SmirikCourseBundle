@@ -8,32 +8,22 @@
 
 {% block body %}
 
-{% form_theme form 'SmirikCourseBundle:Form:fields.html.twig' %}
-
-<form action="{{ path('admin_courses_create') }}" method="post" {{ form_enctype(form) }}>
+<form action="{{ path('admin_courses_create') }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
 		<fieldset>
 		{{ form_row(form.parent) }}
 		{{ form_row(form.title) }}
-		<div class="clearfix">
-			{{ form_errors(form.description) }}
-			{{ form_label(form.description) }}
-			<div class="input">
-				{{ form_widget(form.description, { 'attr': { 'class': 'xxlarge' }}) }}
-			</div>
-		</div>
+		{{ form_row(form.description) }}
 		{{ form_row(form.is_active) }}
 		{{ form_row(form.is_public) }}
 
 		{{ form_rest(form) }}
-	   <p>
-	       <button type="submit" class="btn primary">{{ 'admin.course.action.create'|trans }}</button>
-	   </p>
+    <div class="well">
+  		<a href="{{ path('admin_courses') }}" class="btn">
+  		    {{ 'admin.course.action.back'|trans }}
+  		</a>
+      <button type="submit" class="btn btn-primary">{{ 'admin.course.action.create'|trans }}</button>
+    </div>
 	</fieldset>
 </form>
 
-<div class="well">
-		<a href="{{ path('admin_courses') }}" class="btn">
-		    {{ 'admin.course.action.back'|trans }}
-		</a>
-</div>
 {% endblock %}

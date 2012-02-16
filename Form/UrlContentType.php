@@ -11,7 +11,7 @@ class UrlContentType extends AbstractType
     {
       $builder
         ->add('title', null, array('attr' => array('class' => 'xxlarge')))
-        ->add('description', 'textarea', array('attr' => array('class' => 'tinymce xxlarge ylarge', 'tinymce' => '{"theme":"simple"}')))
+        ->add('description', 'textarea', array('attr' => array('class' => 'tinymce description xxlarge ylarge', 'tinymce' => '{"theme":"simple"}')))
         ->add('url', null, array('attr' => array('class' => 'xxlarge')))
       ;
     }

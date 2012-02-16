@@ -25,7 +25,7 @@
 	        <tr>
 	            <td><a href="{{ path('admin_courses_edit', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
 	            <td><a href="{{ path('admin_courses_edit', { 'id': entity.id }) }}">{{ entity.title }}</a></td>
-	            <td>{{ entity.description }}</td>
+	            <td>{{ entity.description|raw }}</td>
 	            <td>{{ entity.ispublic }}</td>
 	            <td>{{ entity.isactive }}</td>
 	            <td>{% if entity.createdat %}{{ entity.createdat|date('Y-m-d H:i:s') }}{% endif%}</td>

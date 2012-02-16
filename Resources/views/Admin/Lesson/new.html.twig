@@ -1,18 +1,29 @@
 {% extends 'SmirikCourseBundle:Admin:layout.html.twig' %}
 
-<h1>Lesson creation</h1>
+{% block title %}{{ 'admin.lesson.edit.page_title'|trans }}{% endblock %}
 
-<form action="{{ path('admin_lessons_create') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
-    <p>
-        <button type="submit">Create</button>
-    </p>
+{% block header %}
+<h1>{{ 'admin.lesson.new.title'|trans }} <small>{{ 'admin.lesson.edit.title.comment'|trans }}</small></h1>
+{% endblock %}
+
+{% block body %}
+
+<form action="{{ path('admin_lessons_create') }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+	<fieldset>
+    {{ form_errors(form) }}
+ 
+      {{ form_row(form.course) }}
+      {{ form_row(form.title) }}
+      {{ form_row(form._token) }}
+
+    <div class="well">
+  		<a href="{{ path('admin_lessons', { 'course_id': course.id }) }}" class="btn">
+  		    {{ 'admin.course.action.back'|trans }}
+  		</a>
+       <button type="submit" class="btn btn-primary">{{ 'admin.course.action.save'|trans }}</button>
+    </div>
+
+	</fieldset>
 </form>
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('admin_lessons') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+{% endblock %}

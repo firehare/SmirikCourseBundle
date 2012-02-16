@@ -11,7 +11,7 @@ class CourseType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('description', 'textarea', array('attr' => array('class' => 'tinymce xxlarge ylarge', 'tinymce' => '{"theme":"simple"}')))
+            ->add('description', 'textarea', array('attr' => array('class' => 'tinymce description xxlarge ylarge', 'tinymce' => '{"theme":"simple"}')))
             ->add('is_public')
             ->add('is_active')
             ->add('parent',  null, array('empty_value' => '', 'required' => false))
