@@ -9,10 +9,11 @@ use Smirik\CourseBundle\Entity\Lesson as Lesson;
 use Smirik\CourseBundle\Entity\TextContent as TextContent;
 use Smirik\CourseBundle\Entity\UrlContent as UrlContent;
 use Smirik\CourseBundle\Entity\YoutubeContent as YoutubeContent;
+use Doctrine\Common\Persistence\ObjectManager;
 
 class LoadLessonContentData extends AbstractFixture implements OrderedFixtureInterface
 {
-  public function load($manager)
+  public function load(ObjectManager $manager)
   {
    
  		/**

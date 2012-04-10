@@ -1,0 +1,147 @@
+<div id="lesson-content">
+  <div class="tabbable">
+    <ul id="tab" class="nav nav-tabs">
+      <li class="active"><a href="#home" data-toggle="tab">{{ 'admin.lesson.edit.lesson.main'|trans }}</a></li>
+      <li><a href="#textcontent" data-toggle="tab">{{ 'admin.lesson.edit.lesson.text'|trans }}</a></li>
+      <li><a href="#urlcontent" data-toggle="tab">{{ 'admin.lesson.edit.lesson.url'|trans }}</a></li>
+      <li><a href="#youtubecontent" data-toggle="tab">{{ 'admin.lesson.edit.lesson.youtube'|trans }}</a></li>
+    </ul>
+  </div>
+
+  <form action="{{ path('admin_lessons_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal" id="lesson_form">
+  	<fieldset>
+      {{ form_errors(form) }}
+ 
+  <div class="tab-content">
+
+      <div class="tab-pane fade in active" id="home">
+        {{ form_row(form.course) }}
+        {{ form_row(form.title) }}
+        {{ form_row(form._token) }}
+      </div>
+    
+      <div id="textcontent" class="tab-pane fade">
+        {% for text in form.text_content %}
+          <div class="accordion" id="textcontent{{ text.vars.value.id }}">
+            <div class="accordion-group">
+              <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#textcontent{{ text.vars.value.id }}" href="#collapse{{ text.vars.value.id }}">
+                  {{ text.vars.value.title }}
+                </a>
+              </div>
+              <div id="collapse{{ text.vars.value.id }}" class="accordion-body collapse">
+                <div class="accordion-inner">
+                  <ul class="unstyled">
+                    <li>{{ form_row(text.title)}}</li>
+                    <li>{{ form_row(text.description)}}</li>
+                    <li>{{ form_row(text.text)}}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+        <hr />
+        <a data-toggle="modal" class="btn textcontent-add" href="#textcontent-prototype">Add</a>
+      </div>
+    
+      <div id="urlcontent" class="tab-pane fade">
+        {% for url in form.url_content %}
+          <div class="accordion" id="urlcontent{{ url.vars.value.id }}">
+            <div class="accordion-group">
+              <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#urlcontent{{ url.vars.value.id }}" href="#collapse{{ url.vars.value.id }}">
+                  {{ url.vars.value.title }}
+                </a>
+              </div>
+              <div id="collapse{{ url.vars.value.id }}" class="accordion-body collapse">
+                <div class="accordion-inner">
+                  <ul class="unstyled">
+                    <li>{{ form_row(url.title)}}</li>
+                    <li>{{ form_row(url.description)}}</li>
+                    <li>{{ form_row(url.url)}}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+        <hr />
+      </div>
+
+      <div id="youtubecontent" class="tab-pane fade">
+        {% for youtube in form.youtube_content %}
+          <div class="accordion" id="youtubecontent{{ youtube.vars.value.id }}">
+            <div class="accordion-group">
+              <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#youtubecontent{{ youtube.vars.value.id }}" href="#collapse{{ youtube.vars.value.id }}">
+                  {{ youtube.vars.value.title }}
+                </a>
+              </div>
+              <div id="collapse{{ youtube.vars.value.id }}" class="accordion-body collapse">
+                <div class="accordion-inner">
+                  <ul class="unstyled">
+                    <li>{{ form_row(youtube.title)}}</li>
+                    <li>{{ form_row(youtube.description)}}</li>
+                    <li>{{ form_row(youtube.url)}}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+        <hr />
+      </div>
+    
+  </div>
+
+    <div class="well">
+       <button type="submit" class="btn btn-primary">{{ 'admin.course.action.save'|trans }}</button>
+    </div>
+
+  	</fieldset>
+  	
+  	<div data-prototype='{{ form_widget(form.text_content.get('prototype')) }}<button class="btn">Submit</button>' class="modal fade modal-content" id="textcontent-prototype" style="width: 900px;"></div>
+    
+  </form>
+
+  <?php if false: ?>
+  <div data-prototype='{{ form_widget(form.url_content.get('prototype')) }}' class="modal modal-content" id="urlcontent-prototype"></div>
+  <div data-prototype='{{ form_widget(form.youtube_content.get('prototype')) }}' class="modal modal-content" id="youtubecontent-prototype"></div>
+  <?php endif; ?>
+
+  <form action="{{ path('admin_lessons_delete', { 'id': entity.id }) }}" method="post">
+  <div class="well">
+      {{ form_widget(delete_form) }}
+  		<a href="{{ path('admin_lessons', { 'course_id': entity.course.id }) }}" class="btn">
+  		    {{ 'admin.course.action.back'|trans }}
+  		</a>
+      <button type="submit" class="btn btn-danger">{{ 'admin.course.action.delete'|trans }}</button>
+  </div>
+  </form>
+
+</div>
+
+<script>
+  $(function () {
+    $('.nav-tabs a:first').tab('show');
+    var widget_count = $('.accordion-body').length | 0;
+    $(document).ready(function () {
+    
+      $('.modal-content').each(function (key, value) {
+          $(value).on('shown', function () {
+              $('#lesson_form').submit(function () {
+                  $.post($(this).attr('action'), $(this).serialize(), function  (data) {
+                      //console.log(data);
+                      $('#lesson-content').html(data);
+                  });
+                  $(value).modal('hide');
+                  return false;
+              });
+          });
+          $(value).html($(value).attr('data-prototype').replace(/\$\$name\$\$/g, '7')).css('display','none');
+          widget_count++;         
+      });
+    });
+  })
+</script>

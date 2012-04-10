@@ -6,10 +6,11 @@ use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Smirik\CourseBundle\Entity\Lesson as Lesson;
+use Doctrine\Common\Persistence\ObjectManager;
 
 class LoadLessonData extends AbstractFixture implements OrderedFixtureInterface
 {
-  public function load($manager)
+  public function load(ObjectManager $manager)
   {
     
 		for ($i=0; $i<10; $i++)

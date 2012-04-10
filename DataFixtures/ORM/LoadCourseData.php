@@ -6,10 +6,11 @@ use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Smirik\CourseBundle\Entity\Course;
+use Doctrine\Common\Persistence\ObjectManager;
 
 class LoadCourseData extends AbstractFixture implements OrderedFixtureInterface
 {
-  public function load($manager)
+  public function load(ObjectManager $manager)
   {
     
 		$course = new Course();

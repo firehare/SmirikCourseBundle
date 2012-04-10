@@ -52,22 +52,22 @@ class Lesson
     protected $updated_at;
 
     /**
-     * @ORM\OneToMany(targetEntity="LessonContent", mappedBy="lesson")
+     * @ORM\OneToMany(targetEntity="LessonContent", mappedBy="lesson", cascade={"all"})
      */
     public $lesson_content;
 
     /**
-     * @ORM\OneToMany(targetEntity="TextContent", mappedBy="lesson")
+     * @ORM\OneToMany(targetEntity="TextContent", mappedBy="lesson", cascade={"all"})
      */
     public $text_content;
 
     /**
-     * @ORM\OneToMany(targetEntity="YoutubeContent", mappedBy="lesson")
+     * @ORM\OneToMany(targetEntity="YoutubeContent", mappedBy="lesson", cascade={"all"})
      */
     public $youtube_content;
 
     /**
-     * @ORM\OneToMany(targetEntity="UrlContent", mappedBy="lesson")
+     * @ORM\OneToMany(targetEntity="UrlContent", mappedBy="lesson", cascade={"all"})
      */
     public $url_content;
 

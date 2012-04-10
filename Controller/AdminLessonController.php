@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Smirik\CourseBundle\Entity\Lesson;
+use Smirik\CourseBundle\Entity\TextContent;
 use Smirik\CourseBundle\Form\LessonType;
 use Smirik\CourseBundle\Form\TextContentType;
 
@@ -114,29 +115,20 @@ class AdminLessonController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('SmirikCourseBundle:Lesson')->find($id);
-
+        
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Lesson entity.');
         }
-
+        
         $editForm = $this->createForm(new LessonType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
-				
-				$text_content_forms = array();
-				foreach ($entity->getTextContent() as $text_content)
-				{
-					$text_content_forms[] = $this->createForm(new TextContentType(), $text_content)->createView();
-				}
-
-        $text_content_form  = $this->createForm(new TextContentType())->createView();
 
         return array(
             'entity'       => $entity,
-						'text_content_forms' => $text_content_forms,
-						'text_content_form'  => $text_content_form,
             'edit_form'    => $editForm->createView(),
             'delete_form'  => $deleteForm->createView(),
         );
+        
     }
 
     /**
@@ -164,14 +156,23 @@ class AdminLessonController extends Controller
         if ($editForm->isValid()) {
             $em->persist($entity);
             $em->flush();
-
-            return $this->redirect($this->generateUrl('admin_lessons_edit', array('id' => $id)));
+            if ($this->getRequest()->isXmlHttpRequest())
+            {
+              return $this->render('SmirikCourseBundle:Admin/Lesson:edit_ajax.html.twig', array(
+                'entity'      => $entity,
+                'edit_form'   => $editForm->createView(),
+                'delete_form' => $deleteForm->createView(),
+              ));
+            } else
+            {
+              return $this->redirect($this->generateUrl('admin_lessons_edit', array('id' => $id)));
+            }
         }
-
+        
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+          'entity'      => $entity,
+          'edit_form'   => $editForm->createView(),
+          'delete_form' => $deleteForm->createView(),
         );
     }
 
